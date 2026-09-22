@@ -14,6 +14,7 @@ interface FieldProps {
   label?: string
   hint?: string
   error?: string
+  icon?: ReactNode
 }
 
 interface FieldShellProps extends FieldProps {
@@ -34,9 +35,16 @@ function FieldShell({ label, hint, error, children }: FieldShellProps) {
 export const Input = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement> & FieldProps
->(({ label, hint, error, className = '', ...rest }, ref) => (
+>(({ label, hint, error, icon, className = '', ...rest }, ref) => (
   <FieldShell label={label} hint={hint} error={error}>
-    <input ref={ref} className={`${fieldClasses} ${className}`} {...rest} />
+    {icon ? (
+      <span className="relative block">
+        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center">{icon}</span>
+        <input ref={ref} className={`${fieldClasses} pl-10 ${className}`} {...rest} />
+      </span>
+    ) : (
+      <input ref={ref} className={`${fieldClasses} ${className}`} {...rest} />
+    )}
   </FieldShell>
 ))
 Input.displayName = 'Input'

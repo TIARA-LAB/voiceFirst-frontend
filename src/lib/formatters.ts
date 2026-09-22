@@ -60,6 +60,15 @@ export function formatDate(input: string | number | Date): string {
   }).format(date)
 }
 
+export function formatTime(input: string | number | Date): string {
+  const date = typeof input === 'object' ? input : new Date(input)
+  return new Intl.DateTimeFormat('en-NG', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  }).format(date)
+}
+
 export function formatDuration(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds))
   const minutes = Math.floor(whole / 60)

@@ -28,3 +28,14 @@ export function useDebtorPayment(id?: string) {
     },
   })
 }
+
+export function useSetDebtorSettled(id?: string) {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (body: { settled: boolean }) =>
+      api.patch<Debtor>(`/debtors/${id}`, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['debtors'] })
+    },
+  })
+}

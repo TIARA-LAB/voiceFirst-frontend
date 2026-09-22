@@ -17,6 +17,7 @@ const LedgerPage = lazy(() => import('@/pages/LedgerPage'))
 const TransactionDetailsPage = lazy(() => import('@/pages/TransactionDetailsPage'))
 const ProductsPage = lazy(() => import('@/pages/ProductsPage'))
 const ProductCreatePage = lazy(() => import('@/pages/ProductCreatePage'))
+const ProductEditPage = lazy(() => import('@/pages/ProductEditPage'))
 const StockPage = lazy(() => import('@/pages/StockPage'))
 const DebtorsPage = lazy(() => import('@/pages/DebtorsPage'))
 const ReportsPage = lazy(() => import('@/pages/ReportsPage'))
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
           { path: 'transactions/:id', Component: TransactionDetailsPage },
           { path: 'products', Component: ProductsPage },
           { path: 'products/new', Component: ProductCreatePage },
+          { path: 'products/:id/edit', Component: ProductEditPage },
           { path: 'stock', Component: StockPage },
           { path: 'debtors', Component: DebtorsPage },
           { path: 'reports', Component: ReportsPage },

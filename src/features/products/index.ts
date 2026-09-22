@@ -2,12 +2,22 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '@/lib/api-client'
 import type { Product } from '@/types'
 
-export type ProductDraft = Omit<Product, 'id' | 'businessId' | 'createdAt' | 'archived'>
+export type ProductDraft = Omit<Product, 'id' | 'businessId' | 'createdAt' | 'archived'> & {
+  archived?: boolean
+}
 
 export function useProducts() {
   return useQuery({
     queryKey: ['products'],
     queryFn: () => api.get<Product[]>('/products'),
+  })
+}
+
+export function useProduct(id?: string) {
+  return useQuery({
+    queryKey: ['products', id],
+    queryFn: () => api.get<Product>(`/products/${id}`),
+    enabled: Boolean(id),
   })
 }
 
